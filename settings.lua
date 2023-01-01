@@ -7,16 +7,9 @@ data:extend({
 		allow_blank = false,
 	},
 	{
-		type = "int-setting",
-		name = "graftorio2-nth-tick",
-		setting_type = "startup",
-		default_value = "300",
-		allow_blank = false,
-	},
-	{
 		type = "bool-setting",
-		name = "graftorio2-server-save",
-		setting_type = "startup",
+		name = "graftorio-server-save",
+		setting_type = "runtime-global",
 		default_value = false,
 		allow_blank = false,
 	},

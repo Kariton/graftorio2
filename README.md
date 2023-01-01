@@ -129,6 +129,47 @@ so these have to be changed to your needs.
 open your http://domain.name and see the login for Grafana.
 keep in mind that this short guide doesn't explain on how to properly secure everything. this is up to you to fix yourself.
 
+## Plugin
+
+To add stats from your own mod into graftorio you can use the following example:
+
+**info.json**  
+add graftorio as a prerequisite
+```json
+  "dependencies": [
+    "graftorio >= 0.1.0"
+  ],
+```
+
+**control.lua**
+
+```lua
+-- Example plugin
+local remote_events = {}
+local prometheus
+local gauges = {}
+local load_event = function(event)
+  if remote.interfaces["graftorio"] then
+    remote_events = remote.call("graftorio", "get_plugin_events")
+    register_event()
+  end
+end
+script.on_init(load_event)
+script.on_load(load_event)
+
+function register_event()
+   script.on_event(remote_events.graftorio_add_stats, function(event)
+      -- Reset the gauge every time its calculated (helpfull for changing mod names or like the research queue)
+      remote.call('graftorio', 'make_gauge', 'gauge_name', {"extra_label", "item"})
+
+      -- Do your data collection here and number must be a float/int
+      -- Can call the set multiple times (e.g. per item)
+
+      remote.call('graftorio', 'gauge_set', 'gauge_name', number, {"extra_label_value", "item_name"})
+   end)
+end
+```
+
 ## Debugging
 
 ### mod
@@ -154,3 +195,5 @@ this should show a linear growing `Factorio Tick` panel.
 alternatively start a new dashboard and add a graph with the query `factorio_item_production_input`.  
 the graph should render the total of every item produced in your game.  
 
+## Many thanks for
+  - [@TimVroom](https://github.com/TimVroom) from [TheVirtualCrew](https://github.com/TheVirtualCrew) who initialy submitted [afex#16](https://github.com/afex/graftorio/pull/16) for the original repository with a major mod rewrite which was ported to this frok by [@Kariton](https://github.com/Kariton)
