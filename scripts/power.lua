@@ -112,7 +112,7 @@ local on_destroy = function(event)
     local networks = script_data.networks
     local current_idx = entity.electric_network_id
     -- Make sure to create the new network ids before collecting new info
-    if entity.neighbours.copper then
+    if entity.neighbours.copper and event.damage_type == nil then
       entity.disconnect_neighbour()
     end
     local finds = surface.find_entities_filtered({type = "electric-pole", area = area})
