@@ -12,6 +12,11 @@ local lib = {
   events = {
     [defines.events.on_tick] = function(event)
       if event.tick % 600 == 520 then
+        local is_collected_once = {
+          surfaces = false,
+          mods = false,
+        }
+
         local gauges = gauges
         local table_size = table_size
 
@@ -19,12 +24,18 @@ local lib = {
         gauges.connected_player_count:set(table_size(game.connected_players))
         gauges.total_player_count:set(table_size(game.players))
 
-        for _, surface in pairs(game.surfaces) do
-          gauges.seed:set(surface.map_gen_settings.seed, {surface.name})
+        if not is_collected_once.surfaces then
+          for _, surface in pairs(game.surfaces) do
+            gauges.seed:set(surface.map_gen_settings.seed, {surface.name})
+          end
+          is_collected_once.surfaces = true
         end
 
-        for name, version in pairs(game.active_mods) do
-          gauges.mods:set(1, {name, version})
+        if not is_collected_once.mods then
+          for name, version in pairs(game.active_mods) do
+            gauges.mods:set(1, {name, version})
+          end
+          is_collected_once.mods = true
         end
 
         local stats = {
