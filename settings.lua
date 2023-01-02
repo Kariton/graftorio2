@@ -20,4 +20,11 @@ data:extend({
 		default_value = false,
 		allow_blank = false,
 	},
+        {
+                type = "bool-setting",
+                name = "graftorio2-enable-logistic-pickup-and-delivery-stats",
+                setting_type = "runtime-global",
+                default_value = false,
+                allow_blank = false,
+        },
 })
