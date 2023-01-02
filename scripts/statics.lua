@@ -1,6 +1,7 @@
 local translate = require("scripts/translation")
 gauges.tick = prometheus.gauge("factorio_tick", "game tick")
-gauges.players_online = prometheus.gauge("factorio_online_players", "online players")
+gauges.connected_player_count = prometheus.gauge("factorio_connected_player_count", "connected players")
+gauges.total_player_count = prometheus.gauge("factorio_total_player_count", "total registered players")
 gauges.seed = prometheus.gauge("factorio_seed", "seed", {"surface"})
 gauges.mods = prometheus.gauge("factorio_mods", "mods", {"name", "version"})
 
@@ -15,7 +16,8 @@ local lib = {
         local table_size = table_size
 
         gauges.tick:set(event.tick)
-        gauges.players_online:set(table_size(game.connected_players))
+        gauges.connected_player_count:set(table_size(game.connected_players))
+        gauges.total_player_count:set(table_size(game.players))
 
         for _, surface in pairs(game.surfaces) do
           gauges.seed:set(surface.map_gen_settings.seed, {surface.name})
