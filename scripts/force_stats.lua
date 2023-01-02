@@ -99,6 +99,8 @@ end
 local function collect_networks()
   local gauges = gauges
   local item_prototypes = game.item_prototypes
+  local enable_pickup_and_delivery_stats = settings.global["graftorio2-enable-logistic-pickup-and-delivery-stats"].value or false
+
   gauges.logistic_network_items =
     renew_gauge(
     gauges.logistic_network_items,
@@ -153,33 +155,35 @@ local function collect_networks()
         end
 
         -- Collect the pickups and deliveries
-        -- for point_type, point_list in pairs({provider = network.provider_points, requester = network.requester_points, storage = network.storage_points}) do
-        --   local pickup = {}
-        --   local deliver = {}
-        --   for _, point in pairs(point_list) do
-        --     for name, qty in pairs(point.targeted_items_pickup) do
-        --       pickup[name] = (pickup[name] or 0) + qty
-        --     end
-        --     for name, qty in pairs(point.targeted_items_deliver) do
-        --       deliver[name] = (deliver[name] or 0) + qty
-        --     end
-        --   end
+        if enable_pickup_and_delivery_stats then
+          for point_type, point_list in pairs({provider = network.provider_points, requester = network.requester_points, storage = network.storage_points}) do
+            local pickup = {}
+            local deliver = {}
+            for _, point in pairs(point_list) do
+              for name, qty in pairs(point.targeted_items_pickup) do
+                pickup[name] = (pickup[name] or 0) + qty
+              end
+              for name, qty in pairs(point.targeted_items_deliver) do
+                deliver[name] = (deliver[name] or 0) + qty
+              end
+            end
 
-        --   for request_type, values in pairs({["pickup"] = pickup, ["deliver"] = deliver}) do
-        --     for name, qty in pairs(values) do
-        --       if item_prototypes[name] then
-        --         translate.translate(
-        --           item_prototypes[name].localised_name,
-        --           function(translated)
-        --             gauges.logistic_network_items:set(qty, {force_name, surface, idx, name, translated, point_type, request_type})
-        --           end
-        --         )
-        --       else
-        --         gauges.logistic_network_items:set(qty, {force_name, surface, idx, name, name, point_type, request_type})
-        --       end
-        --     end
-        --   end
-        -- end
+            for request_type, values in pairs({["pickup"] = pickup, ["deliver"] = deliver}) do
+              for name, qty in pairs(values) do
+                if item_prototypes[name] then
+                  translate.translate(
+                    item_prototypes[name].localised_name,
+                    function(translated)
+                      gauges.logistic_network_items:set(qty, {force_name, surface, idx, name, translated, point_type, request_type})
+                    end
+                  )
+                else
+                  gauges.logistic_network_items:set(qty, {force_name, surface, idx, name, name, point_type, request_type})
+                end
+              end
+            end
+          end
+        end
 
         for _, src in pairs(bot_stats) do
           translate.translate(
