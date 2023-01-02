@@ -8,7 +8,7 @@ data:extend({
 	},
 	{
 		type = "bool-setting",
-		name = "graftorio-server-save",
+		name = "graftorio2-server-save",
 		setting_type = "runtime-global",
 		default_value = false,
 		allow_blank = false,

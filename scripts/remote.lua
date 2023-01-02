@@ -88,8 +88,8 @@ interface = {
 
 return {
   add_remote_interface = function()
-    if not remote.interfaces["graftorio"] then
-      remote.add_interface("graftorio", interface)
+    if not remote.interfaces["graftorio2"] then
+      remote.add_interface("graftorio2", interface)
     end
   end
 }

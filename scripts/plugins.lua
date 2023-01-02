@@ -11,16 +11,16 @@ end
 local lib = {
   on_load = function()
     -- create the event
-    get_event("graftorio_add_stats")
+    get_event("graftorio2_add_stats")
   end,
   on_init = function()
     -- create the event
-    get_event("graftorio_add_stats")
+    get_event("graftorio2_add_stats")
   end,
   events = {
     [defines.events.on_tick] = function(event)
       if event.tick % 600 == 300 then
-        local event_name = get_event("graftorio_add_stats")
+        local event_name = get_event("graftorio2_add_stats")
         script.raise_event(
           event_name,
           {
