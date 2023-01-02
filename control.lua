@@ -22,6 +22,7 @@ handler.add_lib(require("scripts/power"))
 handler.add_lib(require("scripts/plugins"))
 handler.add_lib(require("scripts/remote"))
 handler.add_lib(require("scripts/translation"))
+handler.add_lib(require("scripts/yarm"))
 
 -- Keep as last to export it all
 handler.add_lib(require("scripts/export"))
