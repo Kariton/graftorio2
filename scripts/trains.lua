@@ -148,8 +148,9 @@ local lib = {
       end
     end,
     [defines.events.on_train_changed_state] = function(event)
-      -- disable for slightly better performance
-      if true then
+      local disable_detailed_train_stats = settings.global["graftorio2-disable-detailed-train-stats"].value or false
+      -- disable detailed train stats for slightly better performance
+      if disable_detailed_train_stats then
         return
       end
       local current_train = event.train
