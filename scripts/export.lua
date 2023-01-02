@@ -30,14 +30,14 @@ local function doExport()
   global.export_data = {
     current = 1,
     chunks = slices,
-    save_mode = settings.global["graftorio-server-save"].value or false
+    save_mode = settings.global["graftorio2-server-save"].value or false
   }
 
   -- clear out file
   if global.export_data.save_mode then
-    game.write_file("graftorio/game.prom", "", false, 0)
+    game.write_file("graftorio2/game.prom", "", false, 0)
   else
-    game.write_file("graftorio/game.prom", "", false)
+    game.write_file("graftorio2/game.prom", "", false)
   end
 end
 
@@ -69,9 +69,9 @@ local lib = {
         d.current = d.current + 1
         if table_size(result) > 0 then
           if d.save_mode then
-            game.write_file("graftorio/game.prom", table.concat(result, "\n") .. "\n", true, 0)
+            game.write_file("graftorio2/game.prom", table.concat(result, "\n") .. "\n", true, 0)
           else
-            game.write_file("graftorio/game.prom", table.concat(result, "\n") .. "\n", true)
+            game.write_file("graftorio2/game.prom", table.concat(result, "\n") .. "\n", true)
           end
         end
       end

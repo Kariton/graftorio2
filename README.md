@@ -131,13 +131,13 @@ keep in mind that this short guide doesn't explain on how to properly secure eve
 
 ## Plugin
 
-To add stats from your own mod into graftorio you can use the following example:
+To add stats from your own mod into graftorio2 you can use the following example:
 
 **info.json**  
-add graftorio as a prerequisite
+add graftorio2 as a prerequisite
 ```json
   "dependencies": [
-    "graftorio >= 0.1.0"
+    "graftorio2 >= 0.1.0"
   ],
 ```
 
@@ -149,8 +149,8 @@ local remote_events = {}
 local prometheus
 local gauges = {}
 local load_event = function(event)
-  if remote.interfaces["graftorio"] then
-    remote_events = remote.call("graftorio", "get_plugin_events")
+  if remote.interfaces["graftorio2"] then
+    remote_events = remote.call("graftorio2", "get_plugin_events")
     register_event()
   end
 end
@@ -158,14 +158,14 @@ script.on_init(load_event)
 script.on_load(load_event)
 
 function register_event()
-   script.on_event(remote_events.graftorio_add_stats, function(event)
+   script.on_event(remote_events.graftorio2_add_stats, function(event)
       -- Reset the gauge every time its calculated (helpfull for changing mod names or like the research queue)
-      remote.call('graftorio', 'make_gauge', 'gauge_name', {"extra_label", "item"})
+      remote.call('graftorio2', 'make_gauge', 'gauge_name', {"extra_label", "item"})
 
       -- Do your data collection here and number must be a float/int
       -- Can call the set multiple times (e.g. per item)
 
-      remote.call('graftorio', 'gauge_set', 'gauge_name', number, {"extra_label_value", "item_name"})
+      remote.call('graftorio2', 'gauge_set', 'gauge_name', number, {"extra_label_value", "item_name"})
    end)
 end
 ```
