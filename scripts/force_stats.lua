@@ -24,7 +24,7 @@ local function collect_production()
     local force_name = force.name
     local evolution = {
       {force.evolution_factor, "total"},
-      {force.evolution_factor_by_pollution, "by_polution"},
+      {force.evolution_factor_by_pollution, "by_pollution"},
       {force.evolution_factor_by_time, "by_time"},
       {force.evolution_factor_by_killing_spawners, "by_killing_spawners"}
     }
@@ -104,10 +104,10 @@ local function collect_networks()
     gauges.logistic_network_items,
     "factorio_logistics_items",
     "Items in logistics",
-    {"force", "surface", "network_idx", "name", "localised_name", "point_type", "request_type"}
+    {"force", "surface", "network", "name", "localised_name", "point_type", "request_type"}
   )
   gauges.logistic_network_bots =
-    renew_gauge(gauges.logistic_network_bots, "factorio_logistics_bots", "Bots in logistic networks", {"force", "surface", "network_idx", "type", "network_type", "network_name"})
+    renew_gauge(gauges.logistic_network_bots, "factorio_logistics_bots", "bots in logistic networks", {"force", "surface", "network", "type", "network_type", "network_name"})
   for _, force in pairs(game.forces) do
     local force_name = force.name
     local bot_stats = {
