@@ -9,6 +9,8 @@ gauges.kill_count_input = prometheus.gauge("factorio_kill_count_input", "kills",
 gauges.kill_count_output = prometheus.gauge("factorio_kill_count_output", "losses", {"force", "name", "localised_name"})
 gauges.entity_build_count_input = prometheus.gauge("factorio_entity_build_count_input", "entities placed", {"force", "name", "localised_name"})
 gauges.entity_build_count_output = prometheus.gauge("factorio_entity_build_count_output", "entities removed", {"force", "name", "localised_name"})
+gauges.pollution_production_input = prometheus.gauge("factorio_pollution_production_input", "pollutions produced", {"force", "name", "localised_name"})
+gauges.pollution_production_output = prometheus.gauge("factorio_pollution_production_output", "pollutions consumed", {"force", "name", "localised_name"})
 
 gauges.items_launched = prometheus.gauge("factorio_items_launched_total", "items launched in rockets", {"force", "name", "localised_name"})
 
@@ -58,7 +60,8 @@ local function collect_production()
       {force.item_production_statistics, gauges.item_production_input, gauges.item_production_output, item_prototypes},
       {force.fluid_production_statistics, gauges.fluid_production_input, gauges.fluid_production_output, fluid_prototypes},
       {force.kill_count_statistics, gauges.kill_count_input, gauges.kill_count_output, entity_prototypes},
-      {force.entity_build_count_statistics, gauges.entity_build_count_input, gauges.entity_build_count_output, entity_prototypes}
+      {force.entity_build_count_statistics, gauges.entity_build_count_input, gauges.entity_build_count_output, entity_prototypes},
+      {game.pollution_statistics, gauges.pollution_production_input, gauges.pollution_production_output, entity_prototypes}
     }
 
     for _, stat in pairs(stats) do
