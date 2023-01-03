@@ -112,7 +112,7 @@ local function collect_networks()
     {"force", "surface", "network", "name", "localised_name", "point_type", "request_type"}
   )
   gauges.logistic_network_bots =
-    renew_gauge(gauges.logistic_network_bots, "factorio_logistics_bots", "bots in logistic networks", {"force", "surface", "network", "type", "network_type", "network_name"})
+    renew_gauge(gauges.logistic_network_bots, "factorio_logistic_network_bots", "bots in logistic networks", {"force", "surface", "network", "type", "network_type", "network_name"})
   for _, force in pairs(game.forces) do
     local force_name = force.name
     local bot_stats = {
