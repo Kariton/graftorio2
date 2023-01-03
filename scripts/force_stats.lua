@@ -107,7 +107,7 @@ local function collect_networks()
   gauges.logistic_network_items =
     renew_gauge(
     gauges.logistic_network_items,
-    "factorio_logistics_items",
+    "factorio_logistic_network_items",
     "Items in logistics",
     {"force", "surface", "network", "name", "localised_name", "point_type", "request_type"}
   )
