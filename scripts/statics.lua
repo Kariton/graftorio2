@@ -5,9 +5,6 @@ gauges.total_player_count = prometheus.gauge("factorio_total_player_count", "tot
 gauges.seed = prometheus.gauge("factorio_seed", "seed", {"surface"})
 gauges.mods = prometheus.gauge("factorio_mods", "mods", {"name", "version"})
 
-gauges.pollution_production_input = prometheus.gauge("factorio_pollution_production_input", "pollutions produced", {"name", "localised_name"})
-gauges.pollution_production_output = prometheus.gauge("factorio_pollution_production_output", "pollutions consumed", {"name", "localised_name"})
-
 local lib = {
   events = {
     [defines.events.on_tick] = function(event)
@@ -38,29 +35,6 @@ local lib = {
           is_collected_once.mods = true
         end
 
-        local stats = {
-          {game.pollution_statistics, gauges.pollution_production_input, gauges.pollution_production_output, "entity-name"}
-        }
-
-        for _, stat in pairs(stats) do
-          for name, n in pairs(stat[1].input_counts) do
-            translate.translate(
-              {stat[4] .. "." .. name},
-              function(translated)
-                stat[2]:set(n, {name, translated})
-              end
-            )
-          end
-
-          for name, n in pairs(stat[1].output_counts) do
-            translate.translate(
-              {stat[4] .. "." .. name},
-              function(translated)
-                stat[3]:set(n, {name, translated})
-              end
-            )
-          end
-        end
       end
     end
   }
