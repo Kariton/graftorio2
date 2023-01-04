@@ -1,12 +1,45 @@
-gauges.yarm_site_amount = prometheus.gauge("factorio_yarm_site_amount", "YARM - site amount remaining", { "force", "name", "type" })
-gauges.yarm_site_ore_per_minute = prometheus.gauge("factorio_yarm_site_ore_per_minute", "YARM - site ore per minute", { "force", "name", "type" })
-gauges.yarm_site_remaining_permille = prometheus.gauge("factorio_yarm_site_remaining_permille", "YARM - site permille remaining", { "force", "name", "type" })
+local translate = require("scripts/translation")
+
+gauges.yarm_resource_monitor = prometheus.gauge("factorio_yarm_resource_monitor", "YARM - Resource Monitor stats", { "force", "site", "site_name", "name", "localised_name", "type" })
+
+local function alphanumeric(str)
+  return str:gsub('%W','_')
+end
 
 local function handleYARM(site)
       local gauges = gauges
-      gauges.yarm_site_amount:set(site.amount, { site.force_name, site.site_name, site.ore_type })
-      gauges.yarm_site_ore_per_minute:set(site.ore_per_minute, { site.force_name, site.site_name, site.ore_type })
-      gauges.yarm_site_remaining_permille:set(site.remaining_permille, { site.force_name, site.site_name, site.ore_type })
+      local item_prototypes = game.item_prototypes
+      local fluid_prototypes = game.fluid_prototypes
+
+      local stats = {
+		{site.amount, gauges.yarm_resource_monitor, "amount"},
+		{site.ore_per_minute, gauges.yarm_resource_monitor, "ore_per_minute"},
+		{site.remaining_permille, gauges.yarm_resource_monitor, "remaining_permille"}
+	  }
+
+      for _, stat in pairs(stats) do
+	      local site_name = string.lower(alphanumeric(site.site_name))
+		  local name = site.ore_type
+
+          if item_prototypes[name] then
+            translate.translate(
+              item_prototypes[name].localised_name,
+              function(translated)
+                stat[2]:set(stat[1], {site.force_name, site_name, site.site_name, name, translated, stat[3]})
+              end
+            )
+          elseif fluid_prototypes[name] then
+            translate.translate(
+              fluid_prototypes[name].localised_name,
+              function(translated)
+                stat[2]:set(stat[1], {site.force_name, site_name, site.site_name, name, translated, stat[3]})
+              end
+            )
+		  else
+              stat[2]:set(stat[1], {site.force_name, site_name, site.site_name, name, translated, stat[3]})
+          end
+	  end
+
 end
 
 local lib = {
