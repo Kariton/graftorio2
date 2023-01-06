@@ -44,24 +44,20 @@ end
 
 local lib = {
   on_load = function()
-    if global.yarm_on_site_update_event_id then
-      if script.get_event_handler(global.yarm_on_site_update_event_id) then
-        script.on_event(global.yarm_on_site_update_event_id, handleYARM)
-      end
+    if remote.interfaces["YARM"] then
+      script.on_event(remote.call("YARM", "get_on_site_updated_event_id"), handleYARM)
     end
   end,
 
   on_init = function()
-    if game.active_mods["YARM"] then
-      global.yarm_on_site_update_event_id = remote.call("YARM", "get_on_site_updated_event_id")
-        script.on_event(global.yarm_on_site_update_event_id, handleYARM)
+    if remote.interfaces["YARM"] then
+      script.on_event(remote.call("YARM", "get_on_site_updated_event_id"), handleYARM)
     end
   end,
 
   on_configuration_changed = function(event)
-    if game.active_mods["YARM"] then
-      global.yarm_on_site_update_event_id = remote.call("YARM", "get_on_site_updated_event_id")
-        script.on_event(global.yarm_on_site_update_event_id, handleYARM)
+    if remote.interfaces["YARM"] then
+      script.on_event(remote.call("YARM", "get_on_site_updated_event_id"), handleYARM)
     end
   end,
 }
