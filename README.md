@@ -32,21 +32,26 @@ graftorio-ng automates this process using docker, or you can set these up by han
 ## Installation
 
 1. download the repository, and extract it into the location you want to host the local database
-2. [install docker](https://docs.docker.com/install/)
+2. if you want the ready to use dashboards you can use the [graftorio2-dashboards](https://github.com/Kariton/graftorio2-dashboards/tree/graftorio-ng) repository
+   - installation method 1 - you have cloned this repository:
+   - run `git submodule update --init` in your shell within this repository. run `git submodule update --remote` to update them.
+   - installation method 2 - you have downlaoded this repository:
+   - download the dashboards repository as ZIP and extrackt it to `config/grafana/dashboards/Factorio`. this is also the way to update those dashboards.
+3. [install docker](https://docs.docker.com/install/)
    - if using windows, you will need to be running Windows 10 Pro
-3. if using macOS or Linux, open the extracted `docker-compose.yml` in a text editor and uncomment the correct path to your Factorio install
+4. if using macOS or Linux, open the extracted `docker-compose.yml` in a text editor and uncomment the correct path to your Factorio install
    - for Linux update the permissions in the data dir (since the containers need those rights):
    - `chown -R 472 config/grafana`
    - `chown -R 65534 config/prometheus`
    - `chown -R 472 data/grafana`
    - `chown -R 65534 data/prometheus`
-4. using a terminal, run `docker-compose up` inside the extracted directory
-5. load `localhost:3000` in a browser, **you should login once and set a secure password!**
+5. using a terminal, run `docker-compose up` inside the extracted directory
+6. load `localhost:3000` in a browser, **you should login once and set a secure password!**
    - there is no need to configure anything:
    - Prometheus is already configured as default datasource
-6. launch factorio
-7. install the "graftorio-ng" mod via the mods menu
-8. load up your game, and see your statistics in the Grafana dashboards
+7. launch factorio
+8. install the "graftorio-ng" mod via the mods menu
+9. load up your game, and see your statistics in the Grafana dashboards
 
 ## Hosting
 

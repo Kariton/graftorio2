@@ -1,0 +1,4 @@
+[submodule "config/grafana/dashboards/Factorio"]
+	path = config/grafana/dashboards/Factorio
+	url = https://github.com/Kariton/graftorio2-dashboards.git
+	branch = graftorio-ng
