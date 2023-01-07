@@ -4,6 +4,12 @@ local handler = require("event_handler")
 gauges = {}
 histograms = {}
 
+-- Enable Lua API global Variable Viewer
+-- https://mods.factorio.com/mod/gvv
+if script.active_mods["gvv"] then
+    require("__gvv__.gvv")()
+end
+
 -- All the events are split into the 10 second export time (600 ticks)
 --
 -- export: 0 - 40
