@@ -14,7 +14,8 @@ local function handleYARM(site)
       local stats = {
 		{site.amount, gauges.yarm_resource_monitor, "amount"},
 		{site.ore_per_minute, gauges.yarm_resource_monitor, "ore_per_minute"},
-		{site.remaining_permille, gauges.yarm_resource_monitor, "remaining_permille"}
+		{site.remaining_permille, gauges.yarm_resource_monitor, "remaining_permille"},
+                {site.etd_minutes, gauges.yarm_resource_monitor, "etd_minutes"}
 	  }
 
       for _, stat in pairs(stats) do
