@@ -12,10 +12,10 @@ local function handleYARM(site)
       local fluid_prototypes = game.fluid_prototypes
 
       local stats = {
-		{site.amount, gauges.yarm_resource_monitor, "amount"},
-		{site.ore_per_minute, gauges.yarm_resource_monitor, "ore_per_minute"},
-		{site.remaining_permille, gauges.yarm_resource_monitor, "remaining_permille"},
-                {site.etd_minutes, gauges.yarm_resource_monitor, "etd_minutes"}
+		{site.amount, "amount"},
+		{site.ore_per_minute, "ore_per_minute"},
+		{site.remaining_permille, "remaining_permille"},
+		{site.etd_minutes, "etd_minutes"}
 	  }
 
       for _, stat in pairs(stats) do
@@ -26,18 +26,18 @@ local function handleYARM(site)
             translate.translate(
               item_prototypes[name].localised_name,
               function(translated)
-                stat[2]:set(stat[1], {site.force_name, site_name, site.site_name, name, translated, stat[3]})
+                gauges.yarm_resource_monitor:set(stat[1], {site.force_name, site_name, site.site_name, name, translated, stat[2]})
               end
             )
           elseif fluid_prototypes[name] then
             translate.translate(
               fluid_prototypes[name].localised_name,
               function(translated)
-                stat[2]:set(stat[1], {site.force_name, site_name, site.site_name, name, translated, stat[3]})
+                gauges.yarm_resource_monitor:set(stat[1], {site.force_name, site_name, site.site_name, name, translated, stat[2]})
               end
             )
 		  else
-              stat[2]:set(stat[1], {site.force_name, site_name, site.site_name, name, translated, stat[3]})
+              sgauges.yarm_resource_monitor:set(stat[1], {site.force_name, site_name, site.site_name, name, translated, stat[2]})
           end
 	  end
 
@@ -64,3 +64,4 @@ local lib = {
 }
 
 return lib
+
