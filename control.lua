@@ -18,10 +18,12 @@ end
 -- power: 240
 -- plugins: 300
 -- statics: 520
+-- surface: 530
 --
 -- The first few exports are slow since they require the translations
 
 handler.add_lib(require("scripts/statics"))
+handler.add_lib(require("scripts/surface"))
 handler.add_lib(require("scripts/force_stats"))
 handler.add_lib(require("scripts/trains"))
 handler.add_lib(require("scripts/power"))
