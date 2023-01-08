@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.3
+Date: 08. 01. 2023
+  Major Features:
+    - Support more surface related stats.
+  Changes:
+    - Replace 'factorio_seed' with 'factorio_surface' with "type" style lables for new stats.
+---------------------------------------------------------------------------------------------------
 Version: 0.0.2
 Date: 07. 01. 2023
   Features:
