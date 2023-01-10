@@ -1,8 +1,31 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.4
+Date: 11. 01. 2023
+  Minor Features:
+    - Support more surface related stats.
+        - surface.wind_orientation_change
+        - surface.always_day
+        - surface.freeze_daytime
+        - surface.show_clouds
+  Bugfixes:
+    - Fix typo that may have caused crashes during YARM metric export if ore
+    type couldn't be translated.
+  Info:
+    - Updated chanlog details for previous versions.
+---------------------------------------------------------------------------------------------------
 Version: 0.0.3
 Date: 08. 01. 2023
   Major Features:
     - Support more surface related stats.
+        - surface.daytime
+        - surface.darkness
+        - surface.wind_speed
+        - surface.wind_orientation
+        - surface.dusk
+        - surface.dawn
+        - surface.evening
+        - surface.morning
+	- surface.peaceful_mode
   Changes:
     - Replace 'factorio_seed' with 'factorio_surface' with "type" style lables for new stats.
 ---------------------------------------------------------------------------------------------------
