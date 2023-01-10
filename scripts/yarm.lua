@@ -19,8 +19,8 @@ local function handleYARM(site)
 	  }
 
       for _, stat in pairs(stats) do
-	      local site_name = string.lower(alphanumeric(site.site_name))
-		  local name = site.ore_type
+          local site_name = string.lower(alphanumeric(site.site_name))
+	  local name = site.ore_type
 
           if item_prototypes[name] then
             translate.translate(
@@ -36,11 +36,11 @@ local function handleYARM(site)
                 gauges.yarm_resource_monitor:set(stat[1], {site.force_name, site_name, site.site_name, name, translated, stat[2]})
               end
             )
-		  else
-              sgauges.yarm_resource_monitor:set(stat[1], {site.force_name, site_name, site.site_name, name, translated, stat[2]})
+	  else
+              gauges.yarm_resource_monitor:set(stat[1], {site.force_name, site_name, site.site_name, name, name, stat[2]})
           end
-	  end
 
+      end
 end
 
 local lib = {
