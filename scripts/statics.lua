@@ -12,11 +12,10 @@ local lib = {
         }
 
         local gauges = gauges
-        local table_size = table_size
 
         gauges.tick:set(event.tick)
-        gauges.connected_player_count:set(table_size(game.connected_players))
-        gauges.total_player_count:set(table_size(game.players))
+        gauges.connected_player_count:set(#game.connected_players)
+        gauges.total_player_count:set(#game.players)
 
         if not is_collected_once.mods then
           for name, version in pairs(game.active_mods) do
