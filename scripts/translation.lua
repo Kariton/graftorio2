@@ -118,13 +118,13 @@ translate.events = {
   [defines.events.on_string_translated] = function(event)
     local result = event.result
     local str = event.localised_string
-    if not event.translated then
-      result = event.localised_string[1]:gsub("entity%-name%.", ""):gsub("technology%-name%.", ""):gsub("recipe%-name%.", ""):gsub("item%-name%.", ""):gsub("fluid%-name%.", "")
-    end
     if type(str) == "table" then
       str = game.table_to_json(str)
     end
     str = game.encode_string(str)
+    if not event.translated then
+      result = event.localised_string[1]:gsub("entity%-name%.", ""):gsub("technology%-name%.", ""):gsub("recipe%-name%.", ""):gsub("item%-name%.", ""):gsub("fluid%-name%.", "")
+    end
     script_data.translations[str] = result
     if #script_data.translation_in_progress and script_data.translation_in_progress[str] and #script_data.translation_in_progress[str].callbacks then
       for _, cb in pairs(script_data.translation_in_progress[str].callbacks) do
