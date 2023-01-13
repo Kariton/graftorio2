@@ -14,6 +14,7 @@ local lib = {
             {surface.wind_speed, "wind_speed"},
             {surface.wind_orientation, "wind_orientation"},
             {surface.wind_orientation_change, "wind_orientation_change"},
+            {surface.solar_power_multiplier, "solar_power_multiplier"},
             {surface.dusk, "dusk"},
             {surface.dawn, "dawn"},
             {surface.evening, "evening"},
