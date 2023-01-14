@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.6
+Date: 14. 01. 2023
+  Minor Features:
+    - Support more surface related stats.
+        - surface.solar_power_multiplier
+    - Add startup option to disable translation.
+    See: https://mods.factorio.com/mod/graftorio-ng/discussion/63b944e7f143237731cd2464
+---------------------------------------------------------------------------------------------------
 Version: 0.0.5
 Date: 11. 01. 2023
   Bugfixes:
