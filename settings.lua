@@ -8,6 +8,13 @@ data:extend({
 	},
 	{
 		type = "bool-setting",
+		name = "graftorio2-disable-translation",
+		setting_type = "startup",
+		default_value = false,
+		allow_blank = false,
+	},
+	{
+		type = "bool-setting",
 		name = "graftorio2-server-save",
 		setting_type = "runtime-global",
 		default_value = true,
