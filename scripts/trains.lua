@@ -7,7 +7,7 @@ local function split(inputstr, sep)
 end
 
 local train_buckets = {}
-local bucket_settings = split(settings.startup["graftorio2-train-histogram-buckets"].value, ",")
+local bucket_settings = split(settings.startup["graftorio-ng-train-histogram-buckets"].value, ",")
 for _, bucket in pairs(bucket_settings) do
   table.insert(train_buckets, tonumber(bucket))
 end
@@ -148,7 +148,7 @@ local lib = {
       end
     end,
     [defines.events.on_train_changed_state] = function(event)
-      local disable_detailed_train_stats = settings.global["graftorio2-disable-detailed-train-stats"].value or false
+      local disable_detailed_train_stats = settings.global["graftorio-ng-disable-detailed-train-stats"].value or false
       -- disable detailed train stats for slightly better performance
       if disable_detailed_train_stats then
         return

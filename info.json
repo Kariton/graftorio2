@@ -1,10 +1,10 @@
 {
-  "name": "graftorio2",
-  "version": "0.1.0",
-  "title": "graftorio2",
-  "author": "remijouannet",
+  "name": "graftorio-ng",
+  "version": "0.0.1",
+  "title": "graftorio-ng",
+  "author": "Kariton",
+  "homepage": "https://github.com/Kariton/graftorio2/tree/graftorio-ng",
   "description": "visualize metrics from your factorio game in grafana",
-  "homepage": "https://github.com/remijouannet/graftorio2",
   "dependencies": [
     "base >= 1.1",
     "? YARM >= 0.8.207"

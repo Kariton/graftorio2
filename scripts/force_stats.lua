@@ -102,7 +102,7 @@ end
 local function collect_networks()
   local gauges = gauges
   local item_prototypes = game.item_prototypes
-  local enable_pickup_and_delivery_stats = settings.global["graftorio2-enable-logistic-pickup-and-delivery-stats"].value or false
+  local enable_pickup_and_delivery_stats = settings.global["graftorio-ng-enable-logistic-pickup-and-delivery-stats"].value or false
 
   gauges.logistic_network_items =
     renew_gauge(

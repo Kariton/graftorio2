@@ -20,9 +20,16 @@ local function request_translate(request, callback)
 end
 
 function translate.translate(request, callback)
+  local disable_translation = settings.startup["graftorio-ng-disable-translation"].value or false
   callback = callback or function(args)
       return args
     end
+
+  if disable_translation then
+    request = request[1]:gsub("entity%-name%.", ""):gsub("technology%-name%.", ""):gsub("recipe%-name%.", ""):gsub("item%-name%.", ""):gsub("fluid%-name%.", "")
+    callback(request)
+    return
+  end
 
   if type(request) == "table" then
     request = game.table_to_json(request)
@@ -116,6 +123,12 @@ translate.events = {
     end
   end,
   [defines.events.on_string_translated] = function(event)
+    local disable_translation = settings.startup["graftorio-ng-disable-translation"].value or false
+
+    if disable_translation then
+      return
+    end
+
     local result = event.result
     local str = event.localised_string
     if type(str) == "table" then

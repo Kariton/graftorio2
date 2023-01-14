@@ -1,7 +1,7 @@
 apiVersion: 1
 
 providers:
-  - name: 'graftorio2'
+  - name: 'graftorio-ng'
     orgId: 1
     type: file
     updateIntervalSeconds: 10

@@ -1,12 +1,20 @@
 
 ![](https://mods-data.factorio.com/assets/ad36f974db944b1540ce50a0aea46221f26f7c36.thumb.png)
-[![Github All Releases](https://img.shields.io/github/downloads/remijouannet/graftorio2/total.svg)]()
 
-# [graftorio2](https://mods.factorio.com/mod/graftorio2)
+# [graftorio-ng](https://mods.factorio.com/mod/graftorio-ng)
 
-**Fork of [graftorio](https://github.com/afex/graftorio)**
-
-[中文文档](./README_cn.md)
+**Released by [afex/graftorio](https://github.com/afex/graftorio)**  
+**Fork of [remijouannet/graftorio2](https://github.com/remijouannet/graftorio2)**  
+**Patched with [TheVirtualCrew/graftorio](https://github.com/TheVirtualCrew/graftorio)**  
+**And a few other updates**  
+```
+afex/graftorio -> remijouannet/graftorio2 -> graftorio-ng
+       \                                          ^
+        \                                        /
+         v                                      /
+                 TheVirtualCrew/graftorio
+```
+  
 
 visualize metrics from your Factorio game in Grafana
 
@@ -15,15 +23,15 @@ visualize metrics from your Factorio game in Grafana
 ## What is this?
 
 [Grafana](https://grafana.com/) is an open-source project for rendering time-series metrics.  
-by using [graftorio2](https://mods.factorio.com/mod/graftorio2), you can create a dashboard with various charts monitoring aspects of your Factorio factory.  
+by using [graftorio-ng](https://mods.factorio.com/mod/graftorio-ng), you can create a dashboard with various charts monitoring aspects of your Factorio factory.  
 this dashboard is viewed using a web browser outside of the game client. (works great in a 2nd monitor!)  
 
-in order to use graftorio2, you need to run the Grafana software and a database called [Prometheus](https://prometheus.io/) locally.  
-graftorio2 automates this process using docker, or you can set these up by hand.
+in order to use graftorio-ng, you need to run the Grafana software and a database called [Prometheus](https://prometheus.io/) locally.  
+graftorio-ng automates this process using docker, or you can set these up by hand.
 
 ## Installation
 
-1. download the latest [release](https://github.com/remijouannet/graftorio2/releases), and extract it into the location you want to host the local database
+1. download the repository, and extract it into the location you want to host the local database
 2. [install docker](https://docs.docker.com/install/)
    - if using windows, you will need to be running Windows 10 Pro
 3. if using macOS or Linux, open the extracted `docker-compose.yml` in a text editor and uncomment the correct path to your Factorio install
@@ -37,7 +45,7 @@ graftorio2 automates this process using docker, or you can set these up by hand.
    - there is no need to configure anything:
    - Prometheus is already configured as default datasource
 6. launch factorio
-7. install the "graftorio2" mod via the mods menu
+7. install the "graftorio-ng" mod via the mods menu
 8. load up your game, and see your statistics in the Grafana dashboards
 
 ## Hosting
@@ -131,13 +139,13 @@ keep in mind that this short guide doesn't explain on how to properly secure eve
 
 ## Plugin
 
-To add stats from your own mod into graftorio2 you can use the following example:
+To add stats from your own mod into graftorio-ng you can use the following example:
 
 **info.json**  
-add graftorio2 as a prerequisite
+add graftorio-ng as a prerequisite
 ```json
   "dependencies": [
-    "graftorio2 >= 0.1.0"
+    "graftorio-ng >= 0.0.1"
   ],
 ```
 
@@ -149,8 +157,8 @@ local remote_events = {}
 local prometheus
 local gauges = {}
 local load_event = function(event)
-  if remote.interfaces["graftorio2"] then
-    remote_events = remote.call("graftorio2", "get_plugin_events")
+  if remote.interfaces["graftorio-ng"] then
+    remote_events = remote.call("graftorio-ng", "get_plugin_events")
     register_event()
   end
 end
@@ -158,14 +166,14 @@ script.on_init(load_event)
 script.on_load(load_event)
 
 function register_event()
-   script.on_event(remote_events.graftorio2_add_stats, function(event)
+   script.on_event(remote_events.graftorio-ng_add_stats, function(event)
       -- Reset the gauge every time its calculated (helpfull for changing mod names or like the research queue)
-      remote.call('graftorio2', 'make_gauge', 'gauge_name', {"extra_label", "item"})
+      remote.call('graftorio-ng', 'make_gauge', 'gauge_name', {"extra_label", "item"})
 
       -- Do your data collection here and number must be a float/int
       -- Can call the set multiple times (e.g. per item)
 
-      remote.call('graftorio2', 'gauge_set', 'gauge_name', number, {"extra_label_value", "item_name"})
+      remote.call('graftorio-ng', 'gauge_set', 'gauge_name', number, {"extra_label_value", "item_name"})
    end)
 end
 ```
@@ -190,7 +198,7 @@ you should see the target from `config/Prometheus/Prometheus.yml`.
 
 ### Grafana
 
-to see if the Grafana data source can read correctly, there is already a included `graftorio2` dashboard.  
+to see if the Grafana data source can read correctly, there is already a included `graftorio-ng` dashboard.  
 this should show a linear growing `Factorio Tick` panel.  
 alternatively start a new dashboard and add a graph with the query `factorio_item_production_input`.  
 the graph should render the total of every item produced in your game.  
