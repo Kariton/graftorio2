@@ -18,6 +18,8 @@ local function handleYARM(site)
 		{site.etd_minutes, "etd_minutes"}
 	  }
 
+      -- reset yarm gauge
+      gauges.yarm_resource_monitor = renew_gauge(gauges.yarm_resource_monitor, "factorio_yarm_resource_monitor", "YARM - Resource Monitor stats", { "force", "site", "site_name", "name", "localised_name", "type" })
       for _, stat in pairs(stats) do
           local site_name = string.lower(alphanumeric(site.site_name))
 	  local name = site.ore_type
