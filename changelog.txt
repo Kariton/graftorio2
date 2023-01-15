@@ -2,6 +2,11 @@
 Version: 0.0.8
 Date: 15. 01. 2023
   Bugfixes:
+    - Reset YARM gauge after export. Otherwise removed sites would stay in the export.
+---------------------------------------------------------------------------------------------------
+Version: 0.0.8
+Date: 15. 01. 2023
+  Bugfixes:
     - REVERT LAST CHANGE (Version 0.0.6)
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.7
