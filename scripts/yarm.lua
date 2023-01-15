@@ -1,5 +1,7 @@
 local translate = require("scripts/translation")
 
+-- yarm gauge needs reset. otherwise removed sites would stay in the export.
+-- reset is done right after export in 'export.lua'.
 gauges.yarm_resource_monitor = prometheus.gauge("factorio_yarm_resource_monitor", "YARM - Resource Monitor stats", { "force", "site", "site_name", "name", "localised_name", "type" })
 
 local function alphanumeric(str)
