@@ -39,6 +39,9 @@ local function doExport()
   else
     game.write_file("graftorio2/game.prom", "", false)
   end
+
+  -- reset yarm gauge. otherwise removed sites would stay in the export.
+  gauges.yarm_resource_monitor = renew_gauge(gauges.yarm_resource_monitor, "factorio_yarm_resource_monitor", "YARM - Resource Monitor stats", { "force", "site", "site_name", "name", "localised_name", "type" })
 end
 
 local lib = {
